@@ -263,7 +263,17 @@ let final_cartao = cartao.slice(-4)
 console.log(`Este é seu cartão: ${final_cartao.padStart(16, '*')} ?`)
 
 
+//JSON.parse  -Transforma string json em objeto 
 
+let person_new = '{"nome":"Bruno", "sobrenome":"Stelmastchuk", "idade": 26}' //String de JSON (como vem nas requisições)
+let person_json = JSON.parse(person_new) //Transforma em um objeto 
 
+console.log(person_json)
+
+//JSON.stringify - transforma o objeto em string json
+
+console.log(JSON.stringify(person_json))
+
+//Promisses
 
 
