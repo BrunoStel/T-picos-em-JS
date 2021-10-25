@@ -98,3 +98,80 @@ console.log(arr3)
 
 
 //Intervalos----------------------------------------------------------------
+
+//setInterval
+let timer
+start = () => {
+     timer = setInterval(showTime, 1000) // vai executar de 1 em 1 segundo
+}
+
+stop = () => {clearInterval(timer)}
+
+function showTime() {
+    let d = new Date()
+    let h = d.getHours()
+    let m = d.getMinutes()
+    let s = d.getSeconds()
+    let horas = h + ':' + m + ':' + s
+
+    document.querySelector('.relogio').innerHTML = horas
+}
+
+//setTimeout
+
+setTimeout(()=>{
+    console.log('Testando timeout')
+},1000) //Vai executar após 1 segundo, uma única vez
+
+
+//Desconstrução Objeto
+let cliente ={
+    nome:'Bruno',
+    sobrenome:'Stelmastchuk',
+    idade:'26',
+    social:{
+        instagram:'brunoStel',
+        github:'Brunostel'
+    }
+}
+
+let {nome, sobrenome:sobrenomeRenomeado, idade= 'Não possui', endereco ='Não tem', social:{github}} = cliente
+let {instagram}= cliente.social
+
+console.log(nome)
+console.log(sobrenomeRenomeado)
+console.log(idade)
+console.log(endereco)
+console.log(github)
+console.log(instagram)
+
+let cliente1 = {
+    nome:'Lacerda',
+    sobrenome:'Silva'
+}
+
+function pegarNome({nome, sobrenome}){
+    return `${nome} ${sobrenome}`
+}
+
+console.log(pegarNome(cliente))
+
+console.log(pegarNome(cliente1))
+
+
+//Desconstrução Array
+let array = ['Bruno', 'Stelmastchuk', 'Roque', '@brunostel']
+
+let [nomePessoa,,,insta] = array //Na ordem do índice
+console.log(nomePessoa)
+console.log(insta)
+
+let [nomeArray, sobrenomeArray] = ['Lucas', 'Santos']
+
+console.log(`${nomeArray} ${sobrenomeArray}`)
+
+
+ criar= () =>[1,2,3]
+
+let [a,b,c] = criar()
+console.log(a,b,c)
