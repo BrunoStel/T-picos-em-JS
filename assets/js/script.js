@@ -175,3 +175,95 @@ console.log(`${nomeArray} ${sobrenomeArray}`)
 
 let [a,b,c] = criar()
 console.log(a,b,c)
+
+
+
+
+//Operador spread - Arrays e Objetos
+let numeros = [1,2,3,4]
+let outros = [...numeros, 5,6,7,8]
+console.log(outros)
+
+let info = {
+    nome:'Bruno',
+    sobrenome:'Roque'
+}
+
+let novaInfo ={
+    ...info,
+    idade:'26'
+}
+
+console.log(novaInfo)
+
+
+//Operador rest
+adicionar = (...numeros) =>{ //Para múltiplos parâmetros que não sabemos quantos serão
+    console.log(numeros)
+}
+
+adicionar(1,2,3,4,5)
+
+let exemplo = ['Bruno', 'Abner', 'Vitor']
+add = (Array, ...Args) => {
+    let novoArray = [...Array, ...Args]
+    return novoArray
+}
+
+let pessoas_array = add(exemplo, 'Adão', 'Ana', 'Gabriela')
+
+console.log(pessoas_array)
+
+
+//Include e repeat
+
+let list = ['carne', 'ovo', 'arroz', 'farinha']
+
+let example = 'Bruno Stel'
+
+console.log(list.includes('carne')) //Retorna true
+console.log(list.includes('queijo')) //Retorna false
+
+console.log(example.includes('Stel'))//Retorna true
+console.log(example.includes('Stelmas'))//Retorna false
+
+let person = 'Joao'
+console.log(person.repeat(5))
+console.log('a'.repeat(30))
+
+
+//Object keys, values, entries
+let new_list = ['pipoca', 'manteiga', 'cacau']
+
+console.log(Object.keys(new_list))
+console.log(Object.values(new_list))
+console.log(Object.entries(new_list))
+
+let new_pessoa = {
+    nome: 'Julia',
+    sobrenome:'Pereira',
+    idade:'55'
+}
+
+console.log(Object.keys(new_pessoa))
+console.log(Object.values(new_pessoa))
+console.log(Object.entries(new_pessoa))
+
+
+//padStart, padEnd
+let number = '9960691'
+console.log(number.padEnd(9, '*')) //NO MÍNIMO 9 CARACTERES, se nao ira preencher com * ao final da string
+
+console.log(number.padStart(9, '*')) //NO MÍNIMO 9 CARACTERES, se nao ira preencher com * no começo da string
+
+let cartao ='7634812734817345'
+
+let final_cartao = cartao.slice(-4)
+
+console.log(`Este é seu cartão: ${final_cartao.padStart(16, '*')} ?`)
+
+
+
+
+
+
