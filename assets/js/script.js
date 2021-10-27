@@ -282,34 +282,57 @@
 //----------------------------------------------Index 2 ----------------------------------------------------------
 //Promisses - Fetch
 
-const url = 'https://jsonplaceholder.typicode.com/users'
+const urlUsuarios = 'https://jsonplaceholder.typicode.com/users'
 
-const httpRequest = (response) => {
+const httpRequest = response => {
+
     if(!response.ok){ //Caso a requisição não retorne um HTTP entre 200 e 299 criará um novo erro
         throw new Error(`HTTP error, status ${response.status}`) //Retornará um erro que será "pego" pelo catch
     } 
+
     return response.json()
 }
 
-const adicionarUsuarios = (json) =>{ //Manipulação da resposta no DOM
-    let html = '<div style="text-align:center; font-size:30px; font-weight:bold; margin-top:10px">Usuários Cadastrados</div>'
-    json.forEach(val =>{
-        html += `<li>ID:${val.id} <strong>Nome:${val.name}</strong> Usuário:${val.username} E-mail:${val.email} Cidade: ${val.address.city}</li><hr>`
+const adicionarUsuarios = json =>{ //Manipulação da resposta no DOM
+    let html = '<div style="text-align:center; font-size:30px; font-weight:bold; margin-top:10px">Usuários Cadastrados - Fetch</div>'
+
+    json.forEach(elem =>{
+        html += `<li>ID:${elem.id} <strong>Nome:${elem.name}</strong> Usuário:${elem.username} E-mail:${elem.email} Cidade: ${elem.address.city}</li><hr>`
     })
-    console.log(html)
+
+
     document.querySelector('.usuarios').innerHTML = html
+
+    return json[0].address //Será capturado pelo 3 then
 }
 
 const handleRequestError = error =>{ //Exibindo o erro criado no httpRequest, caso haja um erro na requisição
     console.log(error)
 }
 
-fetch(url)
+fetch(urlUsuarios)
     .then(httpRequest)
     .then(adicionarUsuarios)
+    .then(json => {console.log(json.city)}) //Demonstrando como podemos criar uma cascata de then
     .catch(handleRequestError)
     
     
+//Assync/await com axios
 
 
+    const adicionarUsuarios2 =  async () =>{ 
 
+        const json = await axios.get(urlUsuarios)
+
+        let html = '<div style="text-align:center; font-size:30px; font-weight:bold; margin-top:10px">Usuários Cadastrados - Axios</div>'
+
+        json.data.forEach(elem =>{
+            html += `<li>ID:${elem.id} <strong>Nome:${elem.name}</strong> Usuário:${elem.username} E-mail:${elem.email} Cidade: ${elem.address.city}</li><hr>`
+        })
+
+
+        document.querySelector('.usuarios2').innerHTML = html
+
+    }
+
+adicionarUsuarios2()
