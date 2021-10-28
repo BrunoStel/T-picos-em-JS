@@ -418,12 +418,13 @@ const adicionarPokemon = async (...numbers) =>{
             userId:id,
             title: titulo,
             body:post
-             }/*, aqui no terceiro argumento poderia configurar o header do método post */)
-             html += `<li><div class='formatar_li'>ID:${response.data.userId} <strong>Titulo:${response.data.title}</strong></div></br> Postagem:${response.data.body}</li><hr>`
+             }/*, aqui no terceiro argumento poderia configurar o header do método post */)   
+            html += `<li><div class='formatar_li'>ID:${response.data.userId} <strong>Titulo:${response.data.title}</strong></div></br> Postagem:${response.data.body}</li><hr>`
+
         } catch (error) {
             console.log(`Erro na requisição ${error}`)
         }
-        document.querySelector('.usuarios3').innerHTML =  html
+            document.querySelector('.usuarios3').innerHTML =  html
     } 
   
     document.querySelector('#form').addEventListener('submit', function(event){
@@ -450,5 +451,25 @@ const enviarArquivo = async () =>{
     const response = await axios.post('https://jsonplaceholder.typicode.com/posts', form) //Ele automaticamente irá colocar na solicitação 
     //um content-type:multipart/form-data
 
-    console.log(response)
+    //Exibindo a imagem que foi carregada --- PRIMEIRO MÉTODO
+    let img = document.createElement('img')
+    img.src= URL.createObjectURL(arquivo)
+    img.width = 200
+
+    document.querySelector('#area').appendChild(img)
+
+     //Exibindo a imagem que foi carregada --- SEGUNDO MÉTODO
+     let reader = new FileReader()
+
+     reader.readAsDataURL(arquivo)
+
+     reader.onloadend = () =>{
+        let img = document.createElement('img')
+        img.src= reader.result
+        img.width = 200
+        document.querySelector('#area').appendChild(img)
+     }
+     
+
+
 }

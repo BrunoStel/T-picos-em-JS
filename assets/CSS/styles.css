@@ -136,3 +136,8 @@ textarea{
     background-color: aquamarine;
 }
     
+#area{
+    display: flex;
+    flex-direction: column;
+   justify-content: center;
+}
