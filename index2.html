@@ -12,8 +12,27 @@
         <div class="container"><ul class="usuarios2"></ul></div>
         <div class="container"><ul class="pokemons"></ul></div>
         <div class="container"><input class='entrada' type="text" placeholder="Digite os números desejados"/></div>
-        <div class="container" onclick="listarPokemons()"><button>Procurar</button></div>
+        <div class="container"><button onclick="listarPokemons()">Procurar Pokemons</button></div>
         <div class="container"><ul class="pokemons2"></ul></div>
+        
+        <form>           
+                <fieldset>
+                        <legend>Cadastro de postagem - Método Post com axios</legend>
+
+                        <label>
+                                Digite o título<br/>
+                        <input  class='titulo' type="text" name="nome"  required minlength="1" maxlength="40" 
+                        title="Coloque somente letras" placeholder="Título da postagem" autofocus />
+                        </label>
+                      
+                        <label for="interesses">Fale mais sobre você</label>
+                        <textarea name="descricao" class="sobreVoce" required minlength="1" maxlength="500" placeholder="Estou pensando..."></textarea>
+                </fieldset>
+        </form>
+        <div class="container" ><button onclick="cadastrarPost()">Cadastrar Posts</button></div>
+     
+
+        <div class="container"><ul class="usuarios3"></ul></div>
 
 
 

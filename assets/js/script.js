@@ -4,6 +4,8 @@
 //     document.querySelector('#imagem').setAttribute('src', diretorio)
 // }
 
+
+
 // //Dimensões
 // obterDados = () =>{
 //     //Vai pegar o valor total padding+borda
@@ -379,7 +381,6 @@ const adicionarPokemon = async (...numbers) =>{
 
     let html = '<div style="text-align:center; font-size:30px; font-weight:bold; margin-top:10px">Pokemons capturados - Axios</div>'
 
-    //console.log(numbers)
        for (let number of numbers[0]){
             try {
                 let pokemon = await axios.get(getPokemon(number))
@@ -390,7 +391,6 @@ const adicionarPokemon = async (...numbers) =>{
             }
         }
 
-      
         document.querySelector('.pokemons2').innerHTML = html
 
     }
@@ -401,3 +401,35 @@ const adicionarPokemon = async (...numbers) =>{
     let arr = (document.querySelector('.entrada').value).split(regExp)
     adicionarPokemon(arr)
  }
+
+
+ //axios com método post
+  let html = '<div style="text-align:center; font-size:30px; font-weight:bold; margin-top:10px">Últimos posts cadastrados</div>'
+  let id = 10
+
+    const sendData = async (titulo,post) =>{
+        let response
+        try {
+            //O axios.post já configura o header como application/json, e já converte o objeto JS em string JSON 
+            //(com o JSON.stringify()) por trás dos panos, enviando os dados para o servidor
+            id++
+            response = await axios.post('https://jsonplaceholder.typicode.com/posts',{
+            userId:id,
+            title: titulo,
+            body:post
+             }/*, aqui no terceiro argumento poderia configurar o header do método post */)
+             html += `<li><div class='formatar_li'>ID:${response.data.userId} <strong>Titulo:${response.data.title}</strong></div></br> Postagem:${response.data.body}</li><hr>`
+        } catch (error) {
+            console.log(`Erro na requisição ${error}`)
+        }
+        document.querySelector('.usuarios3').innerHTML =  html
+        console.log(response)
+    } 
+  
+    const cadastrarPost = () => {
+        const titulo = document.querySelector('.titulo').value
+        const post = document.querySelector('.sobreVoce').value
+
+      sendData(titulo, post)
+  
+    }
