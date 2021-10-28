@@ -15,25 +15,28 @@
         <div class="container"><button onclick="listarPokemons()">Procurar Pokemons</button></div>
         <div class="container"><ul class="pokemons2"></ul></div>
         
-        <form>           
+        <form id="form">           
                 <fieldset>
                         <legend>Cadastro de postagem - Método Post com axios</legend>
 
                         <label>
                                 Digite o título<br/>
-                        <input  class='titulo' type="text" name="nome"  required minlength="1" maxlength="40" 
+                        <input  class='titulo' type="text" name="titulo"  required minlength="5" maxlength="40" 
                         title="Coloque somente letras" placeholder="Título da postagem" autofocus />
                         </label>
                       
                         <label for="interesses">Fale mais sobre você</label>
-                        <textarea name="descricao" class="sobreVoce" required minlength="1" maxlength="500" placeholder="Estou pensando..."></textarea>
+                        <textarea name="sobreVoce" class="sobreVoce" required minlength="30" maxlength="500" placeholder="Estou pensando..."></textarea>
                 </fieldset>
+                <div class="container" ><button>Cadastrar Posts</button></div>
         </form>
-        <div class="container" ><button onclick="cadastrarPost()">Cadastrar Posts</button></div>
+       
      
 
         <div class="container"><ul class="usuarios3"></ul></div>
 
+        <div class="container"><input type="file" class="arquivo"/></div>
+        <div class="container" ><button onclick="enviarArquivo()">Enviar Arquivo</button></div>
 
 
         <script type="text/javascript" src="node_modules/axios/dist/axios.min.js"></script>

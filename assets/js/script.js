@@ -319,6 +319,7 @@ fetch(urlUsuarios)
     .catch(handleRequestError)
     
     
+    
 //Assync/await com axios
 
 
@@ -365,8 +366,8 @@ const adicionarUsuarios3 = async (...numbers) =>{
         if(numberLength == i){ resolve(html)}
         })
      
-    }).then(val =>{
-        document.querySelector('.pokemons').innerHTML = val
+    }).then(html =>{
+        document.querySelector('.pokemons').innerHTML = html
     })
 
 }
@@ -423,13 +424,31 @@ const adicionarPokemon = async (...numbers) =>{
             console.log(`Erro na requisição ${error}`)
         }
         document.querySelector('.usuarios3').innerHTML =  html
-        console.log(response)
     } 
   
-    const cadastrarPost = () => {
-        const titulo = document.querySelector('.titulo').value
-        const post = document.querySelector('.sobreVoce').value
+    document.querySelector('#form').addEventListener('submit', function(event){
+        event.preventDefault() //Impede o recarregamento da pagina ao acionar o evento submit
+        const titulo = this.titulo.value  //o this se refere ao #form, this. seleciona o campo pelo 
+        // atributo name, ou seja, a tag que tiver name='titulo' será selecionada
+        const post = this.sobreVoce.value
 
-      sendData(titulo, post)
-  
-    }
+        sendData(titulo, post)
+    })
+    
+ 
+
+    //Enviando arquivos pelo axios
+
+const enviarArquivo = async () =>{
+
+    const arquivo = document.querySelector('.arquivo').files[0]
+
+    const form = new FormData(); 
+    form.append('Título', 'Foto do menu-mobile'); //Chave:valor
+    form.append('Menu Mobile', arquivo);
+    
+    const response = await axios.post('https://jsonplaceholder.typicode.com/posts', form) //Ele automaticamente irá colocar na solicitação 
+    //um content-type:multipart/form-data
+
+    console.log(response)
+}
