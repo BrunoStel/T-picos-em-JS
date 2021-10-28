@@ -329,10 +329,75 @@ fetch(urlUsuarios)
         json.data.forEach(elem =>{
             html += `<li>ID:${elem.id} <strong>Nome:${elem.name}</strong> Usuário:${elem.username} E-mail:${elem.email} Cidade: ${elem.address.city}</li><hr>`
         })
-
+    
 
         document.querySelector('.usuarios2').innerHTML = html
 
     }
 
 adicionarUsuarios2()
+
+
+
+
+//Pokemon - Criando promisse com async-await
+const getPokemon2 =  (number) =>  `https://pokeapi.co/api/v2/pokemon/${number}`
+
+const adicionarUsuarios3 = async (...numbers) =>{ 
+
+    let html = '<div style="text-align:center; font-size:30px; font-weight:bold; margin-top:10px">Pokemons capturados - Promise - Async/Await</div>'
+
+    
+    const numberLength = numbers.length
+    i = 0
+    const aPromisse = new Promise((resolve, reject)=>{
+        numbers.forEach(async (number)=>{
+        try {
+            let pokemon = await axios.get(getPokemon2(number))
+            html += `<li>ID:${pokemon.data.id} <strong>Nome:${pokemon.data.name}</strong> Local:${pokemon.data.location_area_encounters}  URL: ${pokemon.data.species.url}</li><hr>`
+            i++
+        } catch (error) {
+            html += `<li>Pokemon de número ${number} não existe</li><hr>`
+            i++
+        }
+        if(numberLength == i){ resolve(html)}
+        })
+     
+    }).then(val =>{
+        document.querySelector('.pokemons').innerHTML = val
+    })
+
+}
+
+adicionarUsuarios3(5,898,12,900,1050, 560, 789, 1870)
+
+//Pokemon2 - somente com assync-await
+const getPokemon =  (number) =>  `https://pokeapi.co/api/v2/pokemon/${number}`
+
+const adicionarPokemon = async (...numbers) =>{ 
+    document.querySelector('.pokemons2').innerHTML = '<div style="text-align:center; font-size:30px; font-weight:bold; margin-top:10px">Capturando pokemons...</div>'
+
+    let html = '<div style="text-align:center; font-size:30px; font-weight:bold; margin-top:10px">Pokemons capturados - Axios</div>'
+
+    //console.log(numbers)
+       for (let number of numbers[0]){
+            try {
+                let pokemon = await axios.get(getPokemon(number))
+                html += `<li>ID:${pokemon.data.id} <strong>Nome:${pokemon.data.name}</strong> Local:${pokemon.data.location_area_encounters}  URL: ${pokemon.data.species.url}</li><hr>`
+            }catch (error) {
+                html += `<li>Pokemon de número ${number} não existe</li><hr>`
+                console.log(error)
+            }
+        }
+
+      
+        document.querySelector('.pokemons2').innerHTML = html
+
+    }
+
+
+ const listarPokemons = () =>{
+    const regExp = /_|\s|-|,/
+    let arr = (document.querySelector('.entrada').value).split(regExp)
+    adicionarPokemon(arr)
+ }
